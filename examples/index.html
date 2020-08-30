@@ -5,21 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <form>
     <div class="container">
+        No Styles
         <div class="row">
             <div class="col-25">
-                <ph-user></ph-user>
+                <no-style></no-style>
             </div>
         </div>
+        Custom Styles Applied
         <div class="row">
             <div class="col-25">
-                <ph-todo id="todo"></ph-todo>
+                <ph-todo></ph-todo>
             </div>
         </div>
+        Fixed Widths
         <div class="row">
             <div class="col-25">
-                <!-- supports fixed-sizes as well -->
-                <ph-todo id="todo" Width="300px" ListWidth="300px" ></ph-todo>
+                <ph-todo Width="300px" ListWidth="300px" ></ph-todo>
             </div>
         </div>
+        Loaded with JavaScript
+        <div class="row">
+            <div id="demo" class="col-25">
+            </div>
+        </div>
+        <script>
+            // add elements with JavaScript
+            var lookup = document.createElement('ph-todo');
+            document.getElementById("demo").appendChild(lookup);
+        </script>
     </div>
 </form>

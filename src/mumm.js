@@ -28,74 +28,28 @@ lookupTemplate.innerHTML = `
 		-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 		box-sizing: border-box;         /* Opera/IE 8+ */
 	}
-
-	button:not([disabled]):not([readonly]):hover, 
-	textarea:not([disabled]):not([readonly]):hover, 
-	input:not([disabled]):not([readonly]):hover {
-		box-shadow: 0 0 1px 1px rgb(77, 144, 254) !important;
-	}
-
-	button:not([disabled]):not([readonly]):focus, 
-	textarea:not([disabled]):not([readonly]):focus, 
-	input:not([disabled]):not([readonly]):focus {
-		box-shadow: 0 0 2px 2px #FF8930 !important;
-		outline: none;
-	}
 	.lup_buttons {
 		float: right;
 		margin-top: -19px;
 		height: 20px;
 		
 	}
-	.ui-icon, .ui-widget-content .ui-icon {
-		background-image: url(images/ui-icons_222222_256x240.png);
-	}
-	.lup_base {
-		height: 100%;
-		padding-right: 0px;
-	}
-	.input_tst {
+	input {
 		width: 100%;
-		height: 20px;
-		border: solid 1px #b1abab;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-		padding-left: 7px;
-		padding-right: 20px;
-		font-size: 11px;
-		box-shadow: inset 0 0 1px 1px #e5e5e5;
-	}
-	.input_tst:focus
-	{
-		border: solid 1px #bf0027;
 	}
 	.buttonIcon {
 		width: 16px;
 		height: 16px;
-		margin-top: -11px;
-		left: 50%;
+		margin-top: -5px;
 		margin-left: -7px;
-		position: absolute;
-		top: 50%;
+		background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
 	}
-	.buttonWrapper {
-		
-	}
-	.lup__lst {
-		border: 1px solid #94B6ED !important;
-		outline: 1px solid #A5C7FE !important;
-	}
-	.ui-icon {
-		width: 16px;
-		height: 16px;
-	}
-	.lup__jQueryimgs {
+	.buttonBox {
 		float: left;
 		padding-right: 5px;
 		padding-top: 2px;
 		padding-left: 5px;
-		border-left: 1px solid #898989;
+		
 		height: 18px;
 		position: relative;
 		overflow: hidden;
@@ -133,21 +87,11 @@ lookupTemplate.innerHTML = `
 		border-top: #a9a9a9 1px solid;
 		border-bottom: #a9a9a9 1px solid;
 	}
-	.lup__jQueryimgs:hover {
-		background-color: #d7d7d7;
-	}
-
 	.parent {
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		border-spacing: 0;
-	}
-	.tstWrapper {
-		border: 0px none;
-		background: transparent;
-		width: auto;
-		vertical-align: top;
 	}
 	.required {
 		border-left: solid 4px #bf0027 !important;
@@ -156,11 +100,11 @@ lookupTemplate.innerHTML = `
 	</style>
 	<div class="parent">
 		<div style="padding-right:0px">
-			<input class="input_tst" type="text" />
+			<input part="input" type="text" />
 		</div>
 		<div class="lup_buttons">
-			<div class="lup__jQueryimgs">
-				<div class="buttonIcon">❀</div>
+			<div part="buttonBox" class="buttonBox">
+				<div part="buttonIcon" class="buttonIcon"></div>
 			</div>
 		</div>
 	</div>
@@ -190,7 +134,7 @@ class Lookup extends Control {
 
 		this._lookupListTemplate = this.shadowRoot.querySelector('slot[name=lookupTmp]');
 		this._lookupListSlot = this.shadowRoot.querySelector('slot[name=lookup]');
-		this.LookupInput = this.shadowRoot.querySelector('.input_tst');
+		this.LookupInput = this.shadowRoot.querySelector('input');
 		
 		this.LookupInput.addEventListener('blur', (event) => {
 			this.closeLookup();
@@ -216,7 +160,7 @@ class Lookup extends Control {
 		this.buildLookupResults = this.buildLookupResults.bind(this);
 		this.buildAndPositionResults = this.buildAndPositionResults.bind(this);
 
-		var button = this.shadowRoot.querySelector('.lup__jQueryimgs');
+		var button = this.shadowRoot.querySelector('.buttonBox');
 		button.addEventListener('click', e => {
 			this.initLookup();
 		});
@@ -336,7 +280,7 @@ class Lookup extends Control {
 	setValueText(value, text) {
 		this.text = text;
 		this.value = value;
-		var input = this.shadowRoot.querySelector('.input_tst');
+		var input = this.shadowRoot.querySelector('input');
 		input.value = text;
 
 		this.closeLookup();
